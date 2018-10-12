@@ -13,6 +13,6 @@ else
 		-e "APPLICATION_NAME=$APPLICATION_NAME" -e "ACCOUNT_NAME=$ACCOUNT_NAME" -e "ACCOUNT_ACCESS_KEY=$ACCOUNT_ACCESS_KEY" \
 		-e "EVENT_ENDPOINT=$EVENT_ENDPOINT" -e "FULL_ACCOUNT_NAME=$FULL_ACCOUNT_NAME" \
 		--expose "9090" --network=$NETWORK_NAME --hostname machine-agent \
-		--volume "/var/run/docker.sock:/var/run/docker.sock" --name machine-agent jdbarfield/dynamic-attach-ma
+		--volume "/var/run/docker.sock:/var/run/docker.sock" --name machine-agent jdbarfield/dynamic-attach-ma:4.5.2
 
 fi
