@@ -1,13 +1,20 @@
 #!/bin/bash
 
-if [ ! -f ma.env ]
+if [ ! -f controller.env ]
 then
 
-  echo "You must include an ma.env file"
+  echo "You must include a controller.env file"
 
 else
 
-  export $(cat ma.env | xargs)
+  if [ ! -f app.env ]
+  then
+
+    export $(cat app.env | xargs)
+
+  fi
+
+  export $(cat controller.env | xargs)
 
   if [[ "x$CONTROLLER_HOST" == "x" || "x$CONTROLLER_PORT" == "x" || "x$CONTROLLER_SSL_ENABLED" == "x" || "x$APPLICATION_NAME" == "x" || "x$ACCOUNT_ACCESS_KEY" == "x" ]]; then
 
