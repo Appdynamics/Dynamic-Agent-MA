@@ -7,7 +7,7 @@ then
 
 else
 
-  if [ ! -f app.env ]
+  if [ -f app.env ]
   then
 
     export $(cat app.env | xargs)
