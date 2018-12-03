@@ -22,7 +22,7 @@ else
 
   else
 
-    if [[ "x$FULL_ACCOUNT_NAME" != "x" && "x$EVENT_ENDPOINT" != "x" && "x$NETWORK_NAME" != "x" ]]; then
+    if [[ "x$FULL_ACCOUNT_NAME" != "x" && "x$EVENT_ENDPOINT" != "x" ]]; then
 
       # Enable analytics
       docker run -d -e "CONTROLLER_HOST=$CONTROLLER_HOST" -e "CONTROLLER_PORT=$CONTROLLER_PORT" -e "CONTROLLER_SSL_ENABLED=$CONTROLLER_SSL_ENABLED" \
