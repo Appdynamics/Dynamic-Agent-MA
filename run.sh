@@ -7,13 +7,6 @@ then
 
 else
 
-  if [ -f app.env ]
-  then
-
-    export $(cat app.env | xargs)
-
-  fi
-
   export $(cat controller.env | xargs)
 
   if [[ "x$CONTROLLER_HOST" == "x" || "x$CONTROLLER_PORT" == "x" || "x$CONTROLLER_SSL_ENABLED" == "x" || "x$APPLICATION_NAME" == "x" || "x$ACCOUNT_ACCESS_KEY" == "x" ]]; then

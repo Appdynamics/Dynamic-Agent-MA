@@ -17,7 +17,6 @@ TIER_NAME_FROM
 TIER_NAME_PARAM
 EVENT_ENDPOINT
 FULL_ACCOUNT_NAME
-NETWORK_NAME
 INCLUDE_FILTER
 EXCLUDE_FILTER
 
@@ -59,7 +58,7 @@ TIER_NAME_PARAM
 Notes: See section below - What is a tier?
 Example: TIER_NAME_PARAM=DAPPD_TIER_NAME
 
-As of this writing, EVENT_ENDPOINT, FULL_ACCOUNT_NAME, and NETWORK_NAME are all necessary to enable analytics reporting from the instrumented containers
+As of this writing, EVENT_ENDPOINT and FULL_ACCOUNT_NAME are all necessary to enable analytics reporting from the instrumented containers
  
 EVENT_ENDPOINT
 Notes: The host and port of of the Events Service this application should report to.
@@ -70,11 +69,6 @@ FULL_ACCOUNT_NAME
 Notes: Global Account Name value found on License page of controller
 Example: FULL_ACCOUNT_NAME=customer1_32458762934
  
-NETWORK_NAME
-Notes: Docker network name of containers to be instrumented
-       Can be found using: docker ps -a --format "table {{.Status}}\t{{.Names}}\t{{.Ports}}\t{{.Image}}\t{{.Networks}}"
-Example: NETWORK_NAME=myapp_default
-
 What is a tier?
 
 By default, the Hostname of the container will be used as the tier name in AppDynamics. If you want to change this, there are some optional parameters you can set in the controller.env file.
