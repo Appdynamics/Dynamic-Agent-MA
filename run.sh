@@ -7,8 +7,8 @@ then
 
 else
 
-  docker pull jdbarfield/dynamic-attach-ma
-  docker tag jdbarfield/dynamic-attach-ma machine-agent
+  docker pull jdbarfield/dynamic-attach-ma:1.0
+  docker tag jdbarfield/dynamic-attach-ma:1.0 machine-agent
 
   export $(cat controller.env | xargs)
 
