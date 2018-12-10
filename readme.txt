@@ -14,7 +14,8 @@ ACCOUNT_NAME
 ACCOUNT_ACCESS_KEY
 APPLICATION_NAME
 TIER_NAME_FROM
-TIER_NAME_PARAM
+TIER_NAME_FROM_VALUE
+TIER_NAME_PARAM - Deprecated. Use TIER_NAME_FROM_VALUE instead
 EVENT_ENDPOINT
 FULL_ACCOUNT_NAME
 INCLUDE_FILTER
@@ -54,9 +55,9 @@ Notes: See section below - What is a tier?
 Possible values: HOSTNAME, CONTAINER_NAME, or JVM_PARAM
 Example: TIER_NAME_FROM=CONTAINER_NAME
  
-TIER_NAME_PARAM
+TIER_NAME_FROM_VALUE
 Notes: See section below - What is a tier?
-Example: TIER_NAME_PARAM=DAPPD_TIER_NAME
+Example: TIER_NAME_FROM_VALUE=DAPPD_TIER_NAME
 
 As of this writing, EVENT_ENDPOINT and FULL_ACCOUNT_NAME are all necessary to enable analytics reporting from the instrumented containers
  
@@ -77,7 +78,8 @@ TIER_NAME_FROM
 
 TIER_NAME_FROM=HOSTNAME or if left blank or not included in controller.env, it will use the hostname for the tier 
 TIER_NAME_FROM=CONTAINER_NAME will cause the process to use the name of the container for the tier name
-TIER_NAME_FROM=JVM_PARAM will cause the process to look for the JVM param specified in TIER_NAME_PARAM
+TIER_NAME_FROM=CONTAINER_LABEL will cause the process to use the value of the container label specified in TIER_NAME_FROM_VALUE
+TIER_NAME_FROM=JVM_PARAM will cause the process to look for the JVM param specified in TIER_NAME_FROM_VALUE 
 For example, the following controller.env file will result in the process looking for a JVM parameter -Dservice-name, and using that value for the tier name in AppDynamics.
 
 CONTROLLER_HOST=my.controller.com
@@ -87,7 +89,7 @@ APPLICATION_NAME=Jetty
 ACCOUNT_NAME=customer1
 ACCOUNT_ACCESS_KEY=4e76-a7f8-a5f426acdff0
 TIER_NAME_FROM=JVM_PARAM
-TIER_NAME_PARAM=Dservice-name
+TIER_NAME_FROM_VALUE=Dservice-name
 
 
 Filtering Processes
