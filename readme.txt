@@ -1,11 +1,10 @@
 
-Update the controller.env and optionally the app.env file with the relevant connection information for your controller, then run the run.sh script.
+Update the controller.env with the relevant connection information for your controller, then run the run.sh script.
 
 
 controller.env Parameter Reference
 
 All parameters:
-
 
 CONTROLLER_HOST
 CONTROLLER_PORT
@@ -13,13 +12,17 @@ CONTROLLER_SSL_ENABLED
 ACCOUNT_NAME
 ACCOUNT_ACCESS_KEY
 APPLICATION_NAME
+EVENT_SERVICE_URL
+GLOBAL_ACCOUNT_NAME
 TIER_NAME_FROM
 TIER_NAME_FROM_VALUE
-TIER_NAME_PARAM - Deprecated. Use TIER_NAME_FROM_VALUE instead
-EVENT_ENDPOINT
-FULL_ACCOUNT_NAME
 INCLUDE_FILTER
 EXCLUDE_FILTER
+
+TIER_NAME_PARAM - Deprecated. Use TIER_NAME_FROM_VALUE instead
+EVENT_ENDPOINT - Deprecated. Use EVENT_SERVICE_URL instead
+FULL_ACCOUNT_NAME - Deprecated. Use GLOBAL_ACCOUNT_NAME instead
+
 
 Required Parameters
  
@@ -52,23 +55,23 @@ Optional Parameters
  
 TIER_NAME_FROM
 Notes: See section below - What is a tier?
-Possible values: HOSTNAME, CONTAINER_NAME, or JVM_PARAM
+Possible values: HOSTNAME, CONTAINER_NAME, CONTAINER_LABEL, or JVM_PARAM
 Example: TIER_NAME_FROM=CONTAINER_NAME
  
 TIER_NAME_FROM_VALUE
 Notes: See section below - What is a tier?
 Example: TIER_NAME_FROM_VALUE=DAPPD_TIER_NAME
 
-As of this writing, EVENT_ENDPOINT and FULL_ACCOUNT_NAME are all necessary to enable analytics reporting from the instrumented containers
+EVENT_SERVICE_URL and GLOBAL_ACCOUNT_NAME are both necessary to enable analytics reporting from the instrumented containers
  
-EVENT_ENDPOINT
+EVENT_SERVICE_URL
 Notes: The host and port of of the Events Service this application should report to.
        Should not include http/https, but it should include the port
-Example: EVENT_ENDPOINT=appd.mydomain.com:9080
+Example: EVENT_SERVICE_URL=appd.mydomain.com:9080
  
-FULL_ACCOUNT_NAME
+GLOBAL_ACCOUNT_NAME
 Notes: Global Account Name value found on License page of controller
-Example: FULL_ACCOUNT_NAME=customer1_32458762934
+Example: GLOBAL_ACCOUNT_NAME=customer1_32458762934
  
 What is a tier?
 
@@ -102,3 +105,15 @@ This will be used to identify which processes to attach to. If no value is provi
 EXCLUDE_FILTER
 
 If you know of certain processes that you definitely don't want to instrument, you can provide a regular expression here to filter them out. For example, if no EXCLUDE_FILTER is provided, the process will exclude any Java processes that contain "Dappdynamics" in the command string. This will prevent any already-instrumented processes, such as the machine agent, from getting processed.
+
+
+
+Customizing files in the AppServerAgent directory
+
+Currently, we support the following customizations:
+
+app-agent-config.xml
+
+To use this feature, place your customized version of this file in the same directory as the run.sh script before running it. The Dynamic Agent will then copy this file to the appropriate place in the Java Agent directory of any containers instrumented dynamically after this point.
+
+Note, it will not affect any containers already instrumented or containers manually instumented.
