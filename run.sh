@@ -24,7 +24,14 @@ main() {
 
       VOLUME_MOUNT=""
 
-      if [ -f app-agent-config.xml ]
+      if [ -f cacerts.jks ]
+      then
+
+        tar -cvf extra.tar cacerts.jks
+
+        VOLUME_MOUNT=" -v ${PWD}/extra.tar:/opt/machine-agent/monitors/dynamicAttach/extra.tar -v ${PWD}/cacerts.jks:/opt/machine-agent/conf/cacerts.jks "
+
+      elif [ -f app-agent-config.xml ]
       then
 
         tar -cvf extra.tar app-agent-config.xml
