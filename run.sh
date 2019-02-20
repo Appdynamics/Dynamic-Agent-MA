@@ -9,8 +9,8 @@ main() {
 
   else
 
-    docker pull jdbarfield/dynamic-agent-ma:1.2.1
-    docker tag jdbarfield/dynamic-agent-ma:1.2.1 machine-agent
+    docker pull appdynamics/dynamic-agent-ma:1.2.2
+    docker tag appdynamics/dynamic-agent-ma:1.2.2 machine-agent
 
     export $(cat controller.env | xargs)
 
