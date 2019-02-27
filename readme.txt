@@ -12,16 +12,14 @@ CONTROLLER_SSL_ENABLED
 ACCOUNT_NAME
 ACCOUNT_ACCESS_KEY
 APPLICATION_NAME
+APPLICATION_NAME_FROM
+APPLICATION_NAME_FROM_VALUE
 EVENT_SERVICE_URL
 GLOBAL_ACCOUNT_NAME
 TIER_NAME_FROM
 TIER_NAME_FROM_VALUE
 INCLUDE_FILTER
 EXCLUDE_FILTER
-
-TIER_NAME_PARAM - Deprecated. Use TIER_NAME_FROM_VALUE instead
-EVENT_ENDPOINT - Deprecated. Use EVENT_SERVICE_URL instead
-FULL_ACCOUNT_NAME - Deprecated. Use GLOBAL_ACCOUNT_NAME instead
 
 
 Required Parameters
@@ -52,10 +50,24 @@ Example: APPLICATION_NAME=MyApp
  
 
 Optional Parameters
- 
+
+APPLICATION_NAME_FROM
+Notes: If a match can be found from APPLICATION_NAME_FROM + APPLICATION_NAME_FROM_VALUE, 
+the match will be used for the Application Name of that container. Otherwise, it will use the value from APPLICATION_NAME
+Possible values: CONTAINER_LABEL, JVM_PARAM, or CONTAINER_NAME_REGEX
+
+APPLICATION_NAME_FROM_VALUE
+Notes: Used with APPLICATION_NAME_FROM. If using CONTAINER_NAME_REGEX, do not include escape characters, spaces, or add quotes around the regex
+Examples: 
+APPLICATION_NAME_FROM=CONTAINER_NAME_REGEX
+APPLICATION_NAME_FROM_VALUE=.(.*_.*?)_
+
+APPLICATION_NAME_FROM=JVM_PARAM
+APPLICATION_NAME_FROM_VALUE=Dapplication-name
+
 TIER_NAME_FROM
-Notes: See section below - What is a tier?
-Possible values: HOSTNAME, CONTAINER_NAME, CONTAINER_LABEL, or JVM_PARAM
+Notes: See section below - What is a tier? Also, if using CONTAINER_NAME_REGEX, do not include escape characters, spaces, or add quotes around the regex
+Possible values: HOSTNAME, CONTAINER_NAME, CONTAINER_LABEL, JVM_PARAM, or CONTAINER_NAME_REGEX
 Example: TIER_NAME_FROM=CONTAINER_NAME
  
 TIER_NAME_FROM_VALUE
@@ -106,7 +118,22 @@ EXCLUDE_FILTER
 
 If you know of certain processes that you definitely don't want to instrument, you can provide a regular expression here to filter them out. For example, if no EXCLUDE_FILTER is provided, the process will exclude any Java processes that contain "Dappdynamics" in the command string. This will prevent any already-instrumented processes, such as the machine agent, from getting processed.
 
+CONTAINER_NAME_WHITELIST
+Notes: Comma-delimited list. If populated, only containers whose name is a substring match of one of the entries will be instrumented. 
+Example: CONTAINER_NAME_WHITELIST=myapp1,myapp2
 
+To enable proxy integration, the following values are exposed:
+PROXY_HOST
+PROXY_PORT
+PROXY_USER
+
+LABEL_FILTER_INCLUDE
+Notes: If populated, the Dynamic Agent will only instrument containers matching one of the label names and values. Can be used in conjunction with the LABEL_FILTER_EXCLUDE setting.
+Example: LABEL_FILTER_INCLUDE=com.example.label1=jetty1,jetty2;com.example.label2=jetty2,jetty3;
+
+LABEL_FILTER_EXCLUDE
+Notes: If populated, the Dynamic Agent will NOT instrument containers matching one of the label names and values. Can be used in conjunction with the LABEL_FILTER_INCLUDE setting.
+Example: LABEL_FILTER_EXCLUDE=com.example.label1=jetty1,jetty2;com.example.label2=jetty2,jetty3;
 
 Customizing files in the AppServerAgent directory
 
