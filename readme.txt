@@ -20,7 +20,7 @@ TIER_NAME_FROM
 TIER_NAME_FROM_VALUE
 INCLUDE_FILTER
 EXCLUDE_FILTER
-
+UNIQUE_HOST_ID
 
 Required Parameters
  
@@ -134,6 +134,10 @@ Example: LABEL_FILTER_INCLUDE=com.example.label1=jetty1,jetty2;com.example.label
 LABEL_FILTER_EXCLUDE
 Notes: If populated, the Dynamic Agent will NOT instrument containers matching one of the label names and values. Can be used in conjunction with the LABEL_FILTER_INCLUDE setting.
 Example: LABEL_FILTER_EXCLUDE=com.example.label1=jetty1,jetty2;com.example.label2=jetty2,jetty3;
+
+UNIQUE_HOST_ID
+Notes: If populated, the supplied value will be used as the UNIQUE_HOST_ID instead of the machine-derived UNIQUE_HOST_ID.
+
 
 Customizing files in the AppServerAgent directory
 
