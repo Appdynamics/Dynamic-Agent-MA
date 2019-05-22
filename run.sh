@@ -9,8 +9,8 @@ main() {
 
   else
 
-    docker pull appdynamics/dynamic-agent-ma:1.2.8
-    docker tag appdynamics/dynamic-agent-ma:1.2.8 machine-agent
+    docker pull appdynamics/dynamic-agent-ma:1.2.9
+    docker tag appdynamics/dynamic-agent-ma:1.2.9 machine-agent
 
     export $(cat controller.env | xargs)
 
