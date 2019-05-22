@@ -40,7 +40,9 @@ main() {
 
       fi
 
-      docker run -d --env-file=controller.env $VOLUME_MOUNT --expose "9090" --dns="8.8.8.8" --volume=/:/hostroot:ro --volume "/var/run/docker.sock:/var/run/docker.sock" \
+      HIERARCHY_PATH=`hostname`
+
+      docker run -d --env-file=controller.env -e HIERARCHY_PATH=${HIERARCHY_PATH} $VOLUME_MOUNT --expose "9090" --dns="8.8.8.8" --volume=/:/hostroot:ro --volume "/var/run/docker.sock:/var/run/docker.sock" \
         --hostname machine-agent --name machine-agent machine-agent
 
 
