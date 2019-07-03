@@ -21,6 +21,7 @@ TIER_NAME_FROM_VALUE
 INCLUDE_FILTER
 EXCLUDE_FILTER
 UNIQUE_HOST_ID
+DEBUG_LOGGING
 
 Required Parameters
  
@@ -50,6 +51,9 @@ Example: APPLICATION_NAME=MyApp
  
 
 Optional Parameters
+
+DEBUG_LOGGING
+When set to true, it will add extra logging to the machine agent logging output.
 
 APPLICATION_NAME_FROM
 Notes: If a match can be found from APPLICATION_NAME_FROM + APPLICATION_NAME_FROM_VALUE, 
