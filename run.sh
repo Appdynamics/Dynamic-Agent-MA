@@ -24,19 +24,19 @@ main() {
 
       VOLUME_MOUNT=""
 
-      if [ -f cacerts.jks ]
+      if [ -d agent-files ] && [ "$(ls -A agent-files)" ]
       then
 
-        tar -cvf extra.tar cacerts.jks
+        tar -cvf agent-files.tar agent-files
 
-        VOLUME_MOUNT=" -v ${PWD}/extra.tar:/opt/machine-agent/monitors/dynamicAttach/extra.tar -v ${PWD}/cacerts.jks:/opt/machine-agent/conf/cacerts.jks "
+        VOLUME_MOUNT=" -v ${PWD}/agent-files.tar:/opt/machine-agent/monitors/dynamicAttach/agent-files.tar "
 
-      elif [ -f app-agent-config.xml ]
-      then
+        if [ -f agent-files/cacerts.jks ]
+        then
 
-        tar -cvf extra.tar app-agent-config.xml
+          VOLUME_MOUNT="${VOLUME_MOUNT} -v ${PWD}/agent-files/cacerts.jks:/opt/machine-agent/conf/cacerts.jks "
 
-        VOLUME_MOUNT=" -v ${PWD}/extra.tar:/opt/machine-agent/monitors/dynamicAttach/extra.tar "
+        fi
 
       fi
 
@@ -46,10 +46,10 @@ main() {
         --hostname machine-agent --name machine-agent machine-agent
 
 
-      if [ -f extra.tar ]
+      if [ -f agent-files.tar ]
       then
 
-        rm extra.tar
+        rm agent-files.tar
 
       fi
 
