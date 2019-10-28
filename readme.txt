@@ -23,6 +23,7 @@ EXCLUDE_FILTER
 UNIQUE_HOST_ID
 DEBUG_LOGGING
 MA_PROPERTIES
+JAVA_AGENT_PROPERITES
 
 Required Parameters
  
@@ -58,6 +59,13 @@ Used to add extra run-time parameters to the machine agent
 Examples:
 MA_PROPERTIES=-Dappdynamics.docker.container.containerIdAsHostId.enabled=true
 This will cause the Machine Agent to run with that parameter added to the runtime parameters
+
+JAVA_AGENT_PROPERITES
+Used to add extra run-time parameters to the Java agent
+Examples:
+JAVA_AGENT_PROPERITES=-Dappdynamics.agent.ssl.protocol=TLSv1.2
+This will cause the Java Agent to run with that parameter added to the runtime parameters
+Note: Adding properties not related to the Java Agent, such as -Xmx2G, will have no effect on the JVM
 
 DEBUG_LOGGING
 When set to true, it will add extra logging to the machine agent logging output.
@@ -152,10 +160,8 @@ Notes: If populated, the supplied value will be used as the UNIQUE_HOST_ID inste
 
 Customizing files in the AppServerAgent directory
 
-Currently, we support the following customizations:
+If you would like custom files to be pushed to the agent conf directory, create a new directory called agent-files, and put your new files in this directory. The agent-files directory should reside in the same directory as the run.sh file.
 
-app-agent-config.xml
-
-To use this feature, place your customized version of this file in the same directory as the run.sh script before running it. The Dynamic Agent will then copy this file to the appropriate place in the Java Agent directory of any containers instrumented dynamically after this point.
+The Dynamic Agent will then copy any file in agent-files into the Java Agent conf directory of any containers instrumented dynamically after this point.
 
 Note, it will not affect any containers already instrumented or containers manually instumented.
